@@ -86,6 +86,8 @@ type NutritionJSON struct {
 	NfVitaminA            float64 `json:"nf_vitamin_a_dv"`
 	NfVitaminC            float64 `json:"nf_vitamin_c_dv"`
 	NfCalcium             float64 `json:"nf_calcium_dv"`
+	NfServingSizeQty      float64 `json:"nf_serving_size_qty"`
+	NfServingSizeUnit     string  `json:"nf_serving_size_unit"`
 }
 
 func upcScanAPI(upcNumber string) NutritionJSON {
