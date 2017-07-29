@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"strings"
 	"time"
 )
 
@@ -14,10 +15,65 @@ const (
 
 var apiClient = &http.Client{Timeout: 100 * time.Second}
 
+type handler struct {
+}
+
+func (h *handler) apiServe(w http.ResponseWriter, r *http.Request) {
+	url := strings.Split(r.URL.Path[1:], "/")
+	fmt.Println(url[1])
+	switch url[1] {
+	case "shareModel":
+	}
+}
+func (h *handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, `{
+  "old_api_id": null,
+  "item_id": "51c3d78797c3e6d8d3b546cf",
+  "item_name": "Cola, Cherry",
+  "leg_loc_id": null,
+  "brand_id": "51db3801176fe9790a89ae0b",
+  "brand_name": "Coke",
+  "item_description": "Cherry",
+  "updated_at": null,
+  "nf_ingredient_statement": "Carbonated Water, High Fructose Corn Syrup and/or Sucrose, Caramel Color, Phosphoric Acid, Natural Flavors, Caffeine.",
+  "nf_water_grams": null,
+"nf_calories": 113.12,
+"nf_calories_from_fat": 83.94,
+"nf_total_fat": 9.33,
+"nf_saturated_fat": 5.28,
+"nf_trans_fatty_acid": 0.26,
+"nf_polyunsaturated_fat": 0.4,
+"nf_cholesterol": 27.72,
+"nf_sodium": 182.84,
+"nf_total_carbohydrate": 0.87,
+"nf_dietary_fiber": 0,
+"nf_sugars": 0.13,
+"nf_protein": 6.4,
+"nf_vitamin_a_dv": 6.96,
+"nf_vitamin_c_dv": 0,
+"nf_calcium_dv": 19.88,
+"nf_iron_dv": 0,
+  "nf_refuse_pct": null,
+  "nf_servings_per_container": 6,
+  "nf_serving_size_qty": 8,
+  "nf_serving_size_unit": "fl oz",
+  "nf_serving_weight_grams": null,
+  "allergen_contains_milk": null,
+  "allergen_contains_eggs": null,
+  "allergen_contains_fish": null,
+  "allergen_contains_shellfish": null,
+  "allergen_contains_tree_nuts": null,
+  "allergen_contains_peanuts": null,
+  "allergen_contains_wheat": null,
+  "allergen_contains_soybeans": null,
+  "allergen_contains_gluten": null,
+  "usda_fields": null
+}`)
+}
 func main() {
 	// for now
-	result := searchAPI("cheese")
-	fmt.Println(result)
+	serverHandler := handler{}
+	http.ListenAndServe(":1234", &serverHandler)
 }
 
 type SearchJSON struct {
