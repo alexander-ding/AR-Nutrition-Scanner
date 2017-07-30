@@ -406,7 +406,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 138768358}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b2a0b133ef477745b0ca1feb86db9cc, type: 3}
+  m_Script: {fileID: 11500000, guid: b2fb0e8cc63f0294b90362ec49b27189, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &138768362
@@ -660,7 +660,7 @@ Prefab:
     - target: {fileID: 224579018821878906, guid: f9b9d58e259714f229a44d0fcceec244,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 439.625
+      value: 437.33337
       objectReference: {fileID: 0}
     - target: {fileID: 1824120585181274, guid: f9b9d58e259714f229a44d0fcceec244, type: 2}
       propertyPath: m_IsActive
@@ -688,6 +688,11 @@ Prefab:
         type: 2}
       propertyPath: m_PlaneDistance
       value: 700
+      objectReference: {fileID: 0}
+    - target: {fileID: 114193481383337266, guid: f9b9d58e259714f229a44d0fcceec244,
+        type: 2}
+      propertyPath: preferFrontFacing
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f9b9d58e259714f229a44d0fcceec244, type: 2}
@@ -886,7 +891,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -45, y: -26.6}
-  m_SizeDelta: {x: 100, y: 24.5}
+  m_SizeDelta: {x: 159, y: 24.5}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &467828840
 MonoBehaviour:
@@ -1682,7 +1687,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -45, y: 31.3}
-  m_SizeDelta: {x: 100, y: 24.5}
+  m_SizeDelta: {x: 159, y: 24.5}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &985587362
 MonoBehaviour:
@@ -2039,7 +2044,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -45, y: 2.1}
-  m_SizeDelta: {x: 100, y: 24.5}
+  m_SizeDelta: {x: 159, y: 24.5}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1142816888
 MonoBehaviour:
@@ -3159,7 +3164,6 @@ MonoBehaviour:
   parent: {fileID: 759917054}
   rows: {fileID: 1409878755}
   foodNameBox: {fileID: 1674278340}
-  defaultBarWidth: 142
   barNames:
   - carbs
   - sodium
@@ -3788,7 +3792,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -45, y: -55.6}
-  m_SizeDelta: {x: 100, y: 24.5}
+  m_SizeDelta: {x: 159, y: 24.5}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1910081627
 MonoBehaviour:

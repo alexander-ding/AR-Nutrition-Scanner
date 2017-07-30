@@ -7,7 +7,7 @@ public class LoadWebCam : MonoBehaviour
 {
     public bool preferFrontFacing = false;
 
-    WebCamTexture webCamTexture;
+    private WebCamTexture webCamTexture;
 
     void LoadCamera(string deviceName)
     {
@@ -16,8 +16,12 @@ public class LoadWebCam : MonoBehaviour
         webCamTexture.filterMode = FilterMode.Trilinear;
         rawImage.texture = webCamTexture;
         webCamTexture.Play();
+        ShareWebCamWithPopUp();
     }
 
+    void ShareWebCamWithPopUp() {
+        GameObject.Find("Managements").GetComponent<BarcodeScanner>().SetCamTexture(webCamTexture);
+    }
     void Start()
     {
         foreach (WebCamDevice cam in WebCamTexture.devices)

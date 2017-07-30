@@ -7,26 +7,30 @@ public class PopUp : MonoBehaviour {
     public GameObject parent;
 	public GameObject rows;
 	public Text foodNameBox; 
-	public float defaultBarWidth = 159;
 	public string[] barNames = new string[5] {"calories", "carbs", "fat", "protein", "sugar"};
     public string upc;
 	private Dictionary<string, ProgressBar> bars = new Dictionary<string, ProgressBar>{};
 	public void SetFoodName(string txt) {
 		foodNameBox.text = txt;
 	}
-	public bool SetBarValue(int index, float percentage) {
+    public void SetBarValues(NutritionJSON nutrition) {
+        foreach (string item in barNames) {
+            SetBarValue(item, Unique.FromNutrition(item, nutrition));
+        }
+    }
+	public bool SetBarValue(int index, float number) {
 		if ((index > 4) || (index < 0)) {
 			return false;
 		} else {
-			bars[barNames[index]].SetBar (percentage);
+			bars[barNames[index]].SetBar (number);
 			return true;
 		}
 	}
-	public bool SetBarValue(string key, float percentage) {
+	public bool SetBarValue(string key, float number) {
 		ProgressBar selected;
 		if (bars.TryGetValue (key, out selected)) {
-			selected.SetBar (percentage);
-			return true;
+            selected.SetBar(number);
+            return true;
 		} else {
 			return false;
 		}
@@ -34,7 +38,7 @@ public class PopUp : MonoBehaviour {
     public float GetBarValue(string key){
         ProgressBar selected;
         if (bars.TryGetValue(key, out selected)) {
-            return selected.CurrentWidth();
+            return selected.CurrentValue();
         } else {
             return 0f;
         }
@@ -59,14 +63,16 @@ public class PopUp : MonoBehaviour {
         Object.Destroy(parent);
     }
     public void DisplaySugar() {
+        ProgressBar selected;
+        bars.TryGetValue("sugar", out selected);
         SugarCubes cube = SugarCubesManagement.NewSugarDisplay(upc, new Vector3(759, 200, -100));
-        cube.MakeSugarCubes((uint)(GetBarValue("sugar")/defaultBarWidth* GetMax("sugar") * 10), new Vector3(0, 40, 0));
+        cube.MakeSugarCubes((uint)(selected.CurrentValue() * 10), new Vector3(0, 40, 0));
     }
 	// Use this for initialization
 	void InitializeBars() {
 		for (int i = 0; i < rows.transform.childCount; i++) {
 			GameObject row = rows.transform.GetChild (i).gameObject;
-			bars.Add(barNames[i], new ProgressBar (row, barNames[i], 100f, defaultBarWidth));
+			bars.Add(barNames[i], new ProgressBar (row, barNames[i], 100f));
 		}
 
 		foreach (KeyValuePair<string, ProgressBar> entry in bars) {
@@ -92,20 +98,20 @@ class ProgressBar {
 	private Image rowImage;
 	private Text nameBox;
 	private string unit;
-	private float barWidth;
+	private float barWidth = 159f;
 	private float max;
+    private float current;
 	private int currentFrame = 0;
 	private string name;
 	public int targetFrame = 60;
     public float CurrentWidth(){return targetWidth;}
+    public float CurrentValue() { return current; }
     public float Max() { return max; }
-	public ProgressBar (GameObject folder, string varName, float maxInput, float defaultWidth) {
+	public ProgressBar (GameObject folder, string varName, float maxInput) {
 		progressBar = folder.transform.GetChild(0).gameObject.GetComponent<Image>();
 		unitBox = folder.transform.GetChild (1).gameObject.GetComponent<Text>();
 		rowImage = folder.transform.GetChild (2).gameObject.GetComponent<Image> ();
 		nameBox = folder.transform.GetChild (3).gameObject.GetComponent<Text> ();
-
-		barWidth = defaultWidth;
 		max = maxInput;
 
 		Initialize (varName);
@@ -120,7 +126,7 @@ class ProgressBar {
 		rowImage.sprite = Unique.BarInfos [name].picture;
 		unit = Unique.BarInfos [name].unit;
 		nameBox.text = UppercaseFirst(name);
-
+        barWidth = progressBar.rectTransform.sizeDelta.x;
 	}
 	private string UppercaseFirst(string s) {
 		if (string.IsNullOrEmpty(s)) {
@@ -136,18 +142,20 @@ class ProgressBar {
 		}
 	}
 	public void SetBar(float input) {
-		if (input > max) {
+        current = input;
+        if (input > max) {
 			input = max;
 		}
-		SetBarPercentage (input / max);
-		SetText (input);
+        SetBarPercentage (input / max);
+		SetText (input/max);
 	}
 	public void InstantSetBar(float input){
 		if (input > max) {
 			input = max;
 		}
 		InstantSetBarPercentage (input / max);
-		SetText (input);
+
+		SetText (input/max);
 	}
 	private void SetBarPercentage(float percentage) {
 		startWidth = progressBar.rectTransform.sizeDelta.x;
@@ -159,6 +167,6 @@ class ProgressBar {
 			new Vector3 (percentage * barWidth, progressBar.rectTransform.sizeDelta.y);
 	}
 	private void SetText(float percentage) {
-		unitBox.text = string.Format("{0:N3}", percentage * max) + " " + unit;
+		unitBox.text = string.Format("{0:N3}", current) + " " + unit;
 	}
 }

@@ -20,22 +20,5 @@ public class BarInfo {
 		}
 
 	}
-	public float FromNutrition(NutritionJSON nutrition) {
-		switch (name) {
-		case "calories":
-			return nutrition.nf_calories;
-		case "carbs":
-			return nutrition.nf_total_carbohydrate;
-		case "sodium":
-			return nutrition.nf_sodium;
-		case "fat":
-			return nutrition.nf_total_fat;
-		case "protein":
-			return nutrition.nf_protein;
-		case "sugar": 
-			return nutrition.nf_sugars;
-		default:
-			return 0f;
-		}
-	}
+
 }
