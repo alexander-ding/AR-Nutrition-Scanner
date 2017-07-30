@@ -4,10 +4,12 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class PopUp : MonoBehaviour {
+    public GameObject parent;
 	public GameObject rows;
 	public Text foodNameBox; 
 	public float defaultBarWidth = 159;
 	public string[] barNames = new string[5] {"calories", "carbs", "fat", "protein", "sugar"};
+    public string upc;
 	private Dictionary<string, ProgressBar> bars = new Dictionary<string, ProgressBar>{};
 	public void SetFoodName(string txt) {
 		foodNameBox.text = txt;
@@ -29,12 +31,37 @@ public class PopUp : MonoBehaviour {
 			return false;
 		}
 	}
+    public float GetBarValue(string key){
+        ProgressBar selected;
+        if (bars.TryGetValue(key, out selected)) {
+            return selected.CurrentWidth();
+        } else {
+            return 0f;
+        }
+    }
+    public float GetMax(string key){
+        ProgressBar selected;
+        if (bars.TryGetValue(key, out selected)) {
+            return selected.Max();
+        } else {
+            return 0f;
+        }
+    }
 	public void AcceptBtnHandle() {
 		Debug.Log ("Accept button clicked");
+        DisplaySugar();
 	}
 	public void RejectBtnHandle() {
 		Debug.Log ("Reject button clicked");
+        Destroy();
 	}
+    public void Destroy() {
+        Object.Destroy(parent);
+    }
+    public void DisplaySugar() {
+        SugarCubes cube = SugarCubesManagement.NewSugarDisplay(upc, new Vector3(759, 200, -100));
+        cube.MakeSugarCubes((uint)(GetBarValue("sugar")/defaultBarWidth* GetMax("sugar") * 10), new Vector3(0, 40, 0));
+    }
 	// Use this for initialization
 	void InitializeBars() {
 		for (int i = 0; i < rows.transform.childCount; i++) {
@@ -70,7 +97,8 @@ class ProgressBar {
 	private int currentFrame = 0;
 	private string name;
 	public int targetFrame = 60;
-
+    public float CurrentWidth(){return targetWidth;}
+    public float Max() { return max; }
 	public ProgressBar (GameObject folder, string varName, float maxInput, float defaultWidth) {
 		progressBar = folder.transform.GetChild(0).gameObject.GetComponent<Image>();
 		unitBox = folder.transform.GetChild (1).gameObject.GetComponent<Text>();

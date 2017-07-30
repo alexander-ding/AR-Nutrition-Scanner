@@ -7,6 +7,7 @@ public class Unique {
 	// static public string Home = "https://nutritionix-api.p.mashape.com/v1_1";
 	static public string Home = "localhost:1234/api";
 	static public Hashtable PopUps = new Hashtable();
+    static public Hashtable Displays = new Hashtable();
 	static public Dictionary<string, BarInfo> BarInfos = new Dictionary<string, BarInfo>() {
 		{"carbs", new BarInfo("carbs", "g", BarInfo.StringToColor("#FFCC33FF") )},
 		{"calories", new BarInfo("calories", "kcal", BarInfo.StringToColor("#FF9934FF"))},

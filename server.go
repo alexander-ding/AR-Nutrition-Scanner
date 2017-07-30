@@ -47,7 +47,7 @@ func (h *handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 "nf_sodium": 182.84,
 "nf_total_carbohydrate": 0.87,
 "nf_dietary_fiber": 0,
-"nf_sugars": 0.13,
+"nf_sugars": 24.3,
 "nf_protein": 6.4,
 "nf_vitamin_a_dv": 6.96,
 "nf_vitamin_c_dv": 0,
