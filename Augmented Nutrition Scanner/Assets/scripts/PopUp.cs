@@ -7,36 +7,31 @@ public class PopUp : MonoBehaviour {
     public GameObject parent;
 	public GameObject rows;
 	public Text foodNameBox; 
-	public float defaultBarWidth = 159;
 	public string[] barNames = new string[5] {"calories", "carbs", "fat", "protein", "sugar"};
     public string upc;
 	private Dictionary<string, ProgressBar> bars = new Dictionary<string, ProgressBar>{};
 	public void SetFoodName(string txt) {
 		foodNameBox.text = txt;
 	}
-	public bool SetBarValue(int index, float percentage) {
+    public void SetBarValues(NutritionJSON nutrition) {
+        foreach (string item in barNames) {
+            GetProgressBar(item).SetBar(Unique.FromNutrition(item, nutrition));
+        }
+    }
+	public bool SetBarValue(int index, float number) {
 		if ((index > 4) || (index < 0)) {
 			return false;
 		} else {
-			bars[barNames[index]].SetBar (percentage);
+			bars[barNames[index]].SetBar (number);
 			return true;
 		}
 	}
-	public bool SetBarValue(string key, float percentage) {
-		ProgressBar selected;
-		if (bars.TryGetValue (key, out selected)) {
-			selected.SetBar (percentage);
-			return true;
-		} else {
-			return false;
-		}
-	}
-    public float GetBarValue(string key){
+    public ProgressBar GetProgressBar(string key) {
         ProgressBar selected;
         if (bars.TryGetValue(key, out selected)) {
-            return selected.CurrentWidth();
+            return selected;
         } else {
-            return 0f;
+            return null;
         }
     }
     public float GetMax(string key){
@@ -56,17 +51,20 @@ public class PopUp : MonoBehaviour {
         Destroy();
 	}
     public void Destroy() {
+        Unique.PopUps.Remove(upc);
         Object.Destroy(parent);
     }
     public void DisplaySugar() {
-        SugarCubes cube = SugarCubesManagement.NewSugarDisplay(upc, new Vector3(759, 200, -100));
-        cube.MakeSugarCubes((uint)(GetBarValue("sugar")/defaultBarWidth* GetMax("sugar") * 10), new Vector3(0, 40, 0));
+        ProgressBar selected = GetProgressBar("sugar");
+
+        SugarCubes cube = SugarCubesManagement.NewSugarDisplay(upc, parent, parent.transform.right * 100);
+        cube.MakeSugarCubes((uint)(selected.CurrentValue() * 10), new Vector3(0, 40, 0));
     }
 	// Use this for initialization
 	void InitializeBars() {
 		for (int i = 0; i < rows.transform.childCount; i++) {
 			GameObject row = rows.transform.GetChild (i).gameObject;
-			bars.Add(barNames[i], new ProgressBar (row, barNames[i], 100f, defaultBarWidth));
+			bars.Add(barNames[i], new ProgressBar (row, barNames[i], 100f));
 		}
 
 		foreach (KeyValuePair<string, ProgressBar> entry in bars) {
@@ -84,28 +82,28 @@ public class PopUp : MonoBehaviour {
 	}
 }
 
-class ProgressBar {
+public class ProgressBar {
 	private float targetWidth = 0f;
 	private float startWidth = 0f;
-	private Image progressBar; 
-	private Text unitBox;
-	private Image rowImage;
-	private Text nameBox;
+	public Image progressBar; 
+	public Text unitBox;
+    public Image rowImage;
+    public Text nameBox;
 	private string unit;
-	private float barWidth;
+	private float barWidth = 159f;
 	private float max;
+    private float current;
 	private int currentFrame = 0;
 	private string name;
 	public int targetFrame = 60;
     public float CurrentWidth(){return targetWidth;}
+    public float CurrentValue() { return current; }
     public float Max() { return max; }
-	public ProgressBar (GameObject folder, string varName, float maxInput, float defaultWidth) {
+	public ProgressBar (GameObject folder, string varName, float maxInput) {
 		progressBar = folder.transform.GetChild(0).gameObject.GetComponent<Image>();
 		unitBox = folder.transform.GetChild (1).gameObject.GetComponent<Text>();
 		rowImage = folder.transform.GetChild (2).gameObject.GetComponent<Image> ();
 		nameBox = folder.transform.GetChild (3).gameObject.GetComponent<Text> ();
-
-		barWidth = defaultWidth;
 		max = maxInput;
 
 		Initialize (varName);
@@ -120,7 +118,7 @@ class ProgressBar {
 		rowImage.sprite = Unique.BarInfos [name].picture;
 		unit = Unique.BarInfos [name].unit;
 		nameBox.text = UppercaseFirst(name);
-
+        barWidth = progressBar.rectTransform.sizeDelta.x;
 	}
 	private string UppercaseFirst(string s) {
 		if (string.IsNullOrEmpty(s)) {
@@ -130,24 +128,34 @@ class ProgressBar {
 	}
 	public void UpdateBar() {
 		if ((progressBar.rectTransform.sizeDelta.x != targetWidth) && (currentFrame <= targetFrame)) {
-			progressBar.rectTransform.sizeDelta = new Vector3 (progressBar.rectTransform.sizeDelta.x + (targetWidth - startWidth) / targetFrame, progressBar.rectTransform.sizeDelta.y);
+            if (Mathf.Abs(targetWidth - progressBar.rectTransform.sizeDelta.x) < (targetWidth - startWidth) / targetFrame)
+            {
+                progressBar.rectTransform.sizeDelta.Set (targetWidth, progressBar.rectTransform.sizeDelta.y);
+            } else
+            {
+                progressBar.rectTransform.sizeDelta = new Vector2(progressBar.rectTransform.sizeDelta.x + (targetWidth - startWidth) / targetFrame, progressBar.rectTransform.sizeDelta.y);
+            }
+
 			currentFrame++;
-			SetText (progressBar.rectTransform.sizeDelta.x / barWidth);
+			SetText ();
 		}
 	}
 	public void SetBar(float input) {
-		if (input > max) {
+        current = input;
+        if (input > max) {
 			input = max;
 		}
-		SetBarPercentage (input / max);
-		SetText (input);
+        SetBarPercentage (input / max);
+		SetText ();
 	}
 	public void InstantSetBar(float input){
-		if (input > max) {
+        current = input;
+        if (input > max) {
 			input = max;
 		}
 		InstantSetBarPercentage (input / max);
-		SetText (input);
+
+		SetText ();
 	}
 	private void SetBarPercentage(float percentage) {
 		startWidth = progressBar.rectTransform.sizeDelta.x;
@@ -158,7 +166,7 @@ class ProgressBar {
 		progressBar.rectTransform.sizeDelta = 
 			new Vector3 (percentage * barWidth, progressBar.rectTransform.sizeDelta.y);
 	}
-	private void SetText(float percentage) {
-		unitBox.text = string.Format("{0:N3}", percentage * max) + " " + unit;
+	private void SetText() {
+		unitBox.text = string.Format("{0:N3}", current) + " " + unit;
 	}
 }

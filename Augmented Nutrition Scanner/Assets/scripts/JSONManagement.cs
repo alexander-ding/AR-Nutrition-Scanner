@@ -14,33 +14,33 @@ public class JSONManagement : MonoBehaviour {
 		var headers = new Dictionary<string, string>{};
 		headers.Add ("X-Mashape-Authorization", Unique.ApiKey);
 		WWW www = new WWW (Unique.Home + "/item?upc=" + upc, null, headers);
-		StartCoroutine (WaitForRequest (www));
+        
+        StartCoroutine (WaitForRequest (www));
 	}
 	IEnumerator WaitForRequest(WWW www) {
-		yield return www;
+        EnablePopUpFramework();
+        yield return www;
 		if (www.error == "") {
-			nutrition = JsonUtility.FromJson<NutritionJSON> (www.text);
-            EnablePopUpFrameWork();
-			SetFrameWork ();
-		} else {
+            EnablePopUpFramework();
+            nutrition = JsonUtility.FromJson<NutritionJSON> (www.text);
+            SetFrameWork();
+            
+        } else {
 			Debug.Log ("WWW Error: " + www.error);
+            PopUp.Destroy();
 		}
-	}
+        
+    }
     void EnablePopUpFramework() {
-        PopUp.transform.GetChild(0).gameObject.SetActive(false);
+        PopUp.gameObject.SetActive(true);
     }
 	void SetFrameWork() {
-		PopUp.SetFoodName (nutrition.item_name);
-		PopUp.SetBarValue ("calories", nutrition.nf_calories); // more to do later
-		PopUp.SetBarValue ("carbs", nutrition.nf_total_carbohydrate);
-		PopUp.SetBarValue ("fat", nutrition.nf_total_fat);
-		PopUp.SetBarValue ("protein", nutrition.nf_protein);
-		PopUp.SetBarValue ("sugar", nutrition.nf_sugars);
+        PopUp.SetFoodName(nutrition.item_name);
+        PopUp.SetBarValues (nutrition); // more to do later
 	}
 	// Update is called once per frame
 	void Update () {
-		
-	}
+    }
 }
 
 public class NutritionJSON {

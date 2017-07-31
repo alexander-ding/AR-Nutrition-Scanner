@@ -4,6 +4,7 @@ using UnityEngine;
 public class SugarCubes : MonoBehaviour {
 	public GameObject cube;
     public GameObject parent;
+    public string upc;
 	private uint _total = 0;
 	private uint _current = 0;
 	private uint _frame = 1;
@@ -57,6 +58,8 @@ public class SugarCubes : MonoBehaviour {
 		_currentFrame++;
 	}
     public void Destroy() {
+        Unique.Displays.Remove(upc);
         Object.Destroy(parent);
+        
     }
 }
