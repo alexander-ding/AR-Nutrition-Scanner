@@ -15,7 +15,7 @@ public class PopUp : MonoBehaviour {
 	}
     public void SetBarValues(NutritionJSON nutrition) {
         foreach (string item in barNames) {
-            SetBarValue(item, Unique.FromNutrition(item, nutrition));
+            GetProgressBar(item).SetBar(Unique.FromNutrition(item, nutrition));
         }
     }
 	public bool SetBarValue(int index, float number) {
@@ -26,21 +26,12 @@ public class PopUp : MonoBehaviour {
 			return true;
 		}
 	}
-	public bool SetBarValue(string key, float number) {
-		ProgressBar selected;
-		if (bars.TryGetValue (key, out selected)) {
-            selected.SetBar(number);
-            return true;
-		} else {
-			return false;
-		}
-	}
-    public float GetBarValue(string key){
+    public ProgressBar GetProgressBar(string key) {
         ProgressBar selected;
         if (bars.TryGetValue(key, out selected)) {
-            return selected.CurrentValue();
+            return selected;
         } else {
-            return 0f;
+            return null;
         }
     }
     public float GetMax(string key){
@@ -60,12 +51,13 @@ public class PopUp : MonoBehaviour {
         Destroy();
 	}
     public void Destroy() {
+        Unique.PopUps.Remove(upc);
         Object.Destroy(parent);
     }
     public void DisplaySugar() {
-        ProgressBar selected;
-        bars.TryGetValue("sugar", out selected);
-        SugarCubes cube = SugarCubesManagement.NewSugarDisplay(upc, new Vector3(759, 200, -100));
+        ProgressBar selected = GetProgressBar("sugar");
+
+        SugarCubes cube = SugarCubesManagement.NewSugarDisplay(upc, parent, parent.transform.right * 100);
         cube.MakeSugarCubes((uint)(selected.CurrentValue() * 10), new Vector3(0, 40, 0));
     }
 	// Use this for initialization
@@ -90,13 +82,13 @@ public class PopUp : MonoBehaviour {
 	}
 }
 
-class ProgressBar {
+public class ProgressBar {
 	private float targetWidth = 0f;
 	private float startWidth = 0f;
-	private Image progressBar; 
-	private Text unitBox;
-	private Image rowImage;
-	private Text nameBox;
+	public Image progressBar; 
+	public Text unitBox;
+    public Image rowImage;
+    public Text nameBox;
 	private string unit;
 	private float barWidth = 159f;
 	private float max;
@@ -136,9 +128,16 @@ class ProgressBar {
 	}
 	public void UpdateBar() {
 		if ((progressBar.rectTransform.sizeDelta.x != targetWidth) && (currentFrame <= targetFrame)) {
-			progressBar.rectTransform.sizeDelta = new Vector3 (progressBar.rectTransform.sizeDelta.x + (targetWidth - startWidth) / targetFrame, progressBar.rectTransform.sizeDelta.y);
+            if (Mathf.Abs(targetWidth - progressBar.rectTransform.sizeDelta.x) < (targetWidth - startWidth) / targetFrame)
+            {
+                progressBar.rectTransform.sizeDelta.Set (targetWidth, progressBar.rectTransform.sizeDelta.y);
+            } else
+            {
+                progressBar.rectTransform.sizeDelta = new Vector2(progressBar.rectTransform.sizeDelta.x + (targetWidth - startWidth) / targetFrame, progressBar.rectTransform.sizeDelta.y);
+            }
+
 			currentFrame++;
-			SetText (progressBar.rectTransform.sizeDelta.x / barWidth);
+			SetText ();
 		}
 	}
 	public void SetBar(float input) {
@@ -147,15 +146,16 @@ class ProgressBar {
 			input = max;
 		}
         SetBarPercentage (input / max);
-		SetText (input/max);
+		SetText ();
 	}
 	public void InstantSetBar(float input){
-		if (input > max) {
+        current = input;
+        if (input > max) {
 			input = max;
 		}
 		InstantSetBarPercentage (input / max);
 
-		SetText (input/max);
+		SetText ();
 	}
 	private void SetBarPercentage(float percentage) {
 		startWidth = progressBar.rectTransform.sizeDelta.x;
@@ -166,7 +166,7 @@ class ProgressBar {
 		progressBar.rectTransform.sizeDelta = 
 			new Vector3 (percentage * barWidth, progressBar.rectTransform.sizeDelta.y);
 	}
-	private void SetText(float percentage) {
+	private void SetText() {
 		unitBox.text = string.Format("{0:N3}", current) + " " + unit;
 	}
 }

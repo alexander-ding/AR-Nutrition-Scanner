@@ -10,6 +10,10 @@ using ZXing.QrCode;
 public class BarcodeScanner : MonoBehaviour {
     private WebCamTexture camTexture = null;
     private Rect screenRect;
+    private void Start()
+    {
+        InvokeRepeating("Scan", 0f, 0.6f);
+    }
     void Update()
     {
         if (camTexture != null)
@@ -21,7 +25,7 @@ public class BarcodeScanner : MonoBehaviour {
     {
         camTexture = input;
     }
-    void OnGUI()
+    void Scan()
     {
         if (camTexture == null) return;
         // drawing the camera on screen
