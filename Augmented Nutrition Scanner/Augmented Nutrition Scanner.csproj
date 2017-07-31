@@ -133,6 +133,7 @@
     <Compile Include="Assets\OVR\Scripts\Util\OVRSceneSampleController.cs" />
     <Compile Include="Assets\OVR\Scripts\Util\OVRScreenFade.cs" />
     <Compile Include="Assets\OVR\Scripts\Util\OVRWaitCursor.cs" />
+    <Compile Include="Assets\Scripts\BarcodeScanner.cs" />
     <Compile Include="Assets\Scripts\BarInfo.cs" />
     <Compile Include="Assets\Scripts\JSONManagement.cs" />
     <Compile Include="Assets\Scripts\PopUp.cs" />

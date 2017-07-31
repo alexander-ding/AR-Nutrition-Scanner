@@ -19,8 +19,10 @@ class PopUpManagement : MonoBehaviour {
 		jsonManagement.GetComponent<JSONManagement>().upc = Upc;
         newPopUp.transform.GetChild(0).GetComponent<PopUp>().upc = Upc;
 		newPopUp.SetActive (true);
+        newPopUp.transform.GetChild(0).gameObject.SetActive(false);
 
-		Unique.PopUps.Add (Upc, newPopUp.transform.GetChild(0).GetComponent<PopUp>());
+
+        Unique.PopUps.Add (Upc, newPopUp.transform.GetChild(0).GetComponent<PopUp>());
 
 		return newPopUp.transform.GetChild(0).GetComponent<PopUp>();
     }
@@ -36,9 +38,10 @@ class PopUpManagement : MonoBehaviour {
 		rect.position = spaceCoor;
 		rect.eulerAngles = orientation;
         newPopUp.transform.GetChild(0).GetComponent<PopUp>().upc = Upc;
-        newPopUp.SetActive (true);
+        newPopUp.SetActive(true);
+        newPopUp.transform.GetChild(0).gameObject.SetActive(false);
 
-		Unique.PopUps.Add (Upc, newPopUp.transform.GetChild(0).GetComponent<PopUp>());
+        Unique.PopUps.Add (Upc, newPopUp.transform.GetChild(0).GetComponent<PopUp>());
 
         return newPopUp.transform.GetChild(0).GetComponent<PopUp>();
     }

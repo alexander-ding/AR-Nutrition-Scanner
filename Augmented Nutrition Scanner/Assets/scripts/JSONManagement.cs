@@ -20,11 +20,15 @@ public class JSONManagement : MonoBehaviour {
 		yield return www;
 		if (www.error == "") {
 			nutrition = JsonUtility.FromJson<NutritionJSON> (www.text);
+            EnablePopUpFrameWork();
 			SetFrameWork ();
 		} else {
 			Debug.Log ("WWW Error: " + www.error);
 		}
 	}
+    void EnablePopUpFramework() {
+        PopUp.transform.GetChild(0).gameObject.SetActive(false);
+    }
 	void SetFrameWork() {
 		PopUp.SetFoodName (nutrition.item_name);
 		PopUp.SetBarValue ("calories", nutrition.nf_calories); // more to do later
