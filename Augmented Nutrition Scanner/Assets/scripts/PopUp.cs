@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
 public class PopUp : MonoBehaviour {
-    public GameObject parent;
+	public GameObject parent;
 	public GameObject rows;
 	public Text foodNameBox; 
 	public string[] barNames = new string[5] {"calories", "carbs", "fat", "protein", "sugar"};
@@ -15,7 +14,7 @@ public class PopUp : MonoBehaviour {
 	}
     public void SetBarValues(NutritionJSON nutrition) {
         foreach (string item in barNames) {
-            GetProgressBar(item).SetBar(Unique.FromNutrition(item, nutrition));
+            GetProgressBar(item).SetBar(BarInfo.FromNutrition(item, nutrition));
         }
     }
 	public bool SetBarValue(int index, float number) {
@@ -51,17 +50,24 @@ public class PopUp : MonoBehaviour {
         Destroy();
 	}
     public void Destroy() {
-        Unique.PopUps.Remove(upc);
-        Object.Destroy(parent);
+		SugarCubes sugar = null;
+		sugar = parent.transform.GetComponentInChildren<SugarCubes> ();
+		if (sugar != null) {
+			sugar.Destroy ();
+		}
+		Unique.PopUps.Remove(upc);
+		Object.Destroy(parent);
     }
+
     public void DisplaySugar() {
         ProgressBar selected = GetProgressBar("sugar");
-
-        SugarCubes cube = SugarCubesManagement.NewSugarDisplay(upc, parent, parent.transform.right * 100);
+		float x = parent.GetComponent<RectTransform>().sizeDelta.x / 2  + 70f;
+		float y = -parent.GetComponent<RectTransform> ().sizeDelta.y / 4;
+		SugarCubes cube = SugarCubesManagement.NewSugarDisplay(upc, this, new Vector3(x, y,0));
         cube.MakeSugarCubes((uint)(selected.CurrentValue() * 10), new Vector3(0, 40, 0));
     }
 	// Use this for initialization
-	void InitializeBars() {
+	private void InitializeBars() {
 		for (int i = 0; i < rows.transform.childCount; i++) {
 			GameObject row = rows.transform.GetChild (i).gameObject;
 			bars.Add(barNames[i], new ProgressBar (row, barNames[i], 100f));
@@ -71,11 +77,18 @@ public class PopUp : MonoBehaviour {
 			entry.Value.InstantSetBar (0f);
 		}
 	}
+	private void FaceCamera() {
+		Vector3 dist = (parent.transform.position - Camera.main.gameObject.transform.position).normalized;
+		Quaternion lookDirection = Quaternion.LookRotation (dist);
+		parent.transform.rotation = lookDirection;
+	}
 	void Start () {
 		InitializeBars ();
+		FaceCamera ();
 	}
 	// Update is called once per frame
 	void Update () {
+		FaceCamera ();
 		foreach (KeyValuePair<string, ProgressBar> entry in bars) {
 			entry.Value.UpdateBar ();
 		}

@@ -82,3 +82,4 @@
 /Users/apple/Google Drive/GitHub/augmented_nutrition_scanner/Augmented Nutrition Scanner/Temp/bin/Debug/Unity.CecilTools.dll
 /Users/apple/Google Drive/GitHub/augmented_nutrition_scanner/Augmented Nutrition Scanner/Temp/bin/Debug/Mono.Cecil.Pdb.dll
 /Users/apple/Google Drive/GitHub/augmented_nutrition_scanner/Augmented Nutrition Scanner/Temp/bin/Debug/Mono.Cecil.Mdb.dll
+/Users/apple/Google Drive/GitHub/augmented_nutrition_scanner/Augmented Nutrition Scanner/Temp/bin/Debug/zxing.unity.dll

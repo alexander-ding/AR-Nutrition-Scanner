@@ -1,13 +1,13 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/scripts/CreateSugarCube.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/BarcodeScanner.cs">
     <Files>
-      <File FileName="Assets/scripts/CreateSugarCube.cs" Line="17" Column="19" />
-      <File FileName="Assets/scripts/PopUp.cs" Line="1" Column="1" />
-      <File FileName="Assets/scripts/JSONManagement.cs" Line="1" Column="1" />
-      <File FileName="Assets/scripts/PopUpManagement.cs" Line="1" Column="1" />
-      <File FileName="Assets/scripts/BarInfo.cs" Line="1" Column="1" />
-      <File FileName="Assets/scripts/Unique.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/PopUp.cs" Line="66" Column="17" />
+      <File FileName="Assets/Scripts/JSONManagement.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/PopUpManagement.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/BarInfo.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Unique.cs" Line="13" Column="11" />
+      <File FileName="Assets/Scripts/BarcodeScanner.cs" Line="44" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

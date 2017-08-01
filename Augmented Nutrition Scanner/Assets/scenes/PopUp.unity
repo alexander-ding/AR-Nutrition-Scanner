@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657856, g: 0.49641234, b: 0.57481724, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -283,7 +283,7 @@ GameObject:
   - component: {fileID: 94609337}
   m_Layer: 0
   m_Name: Cube (2)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -367,6 +367,7 @@ GameObject:
   - component: {fileID: 138768359}
   - component: {fileID: 138768362}
   - component: {fileID: 138768361}
+  - component: {fileID: 138768363}
   m_Layer: 0
   m_Name: Managements
   m_TagString: Untagged
@@ -418,6 +419,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d12b00be534434c3aa06425710dd7ada, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &138768363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 138768358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 388599f91db4f41479789d157aa6b4ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &236468849
@@ -560,7 +572,7 @@ Transform:
   m_GameObject: {fileID: 281057962}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 4.8235254, y: 4.823527, z: 4.823527}
   m_Children:
   - {fileID: 819698829}
   m_Father: {fileID: 0}
@@ -660,7 +672,7 @@ Prefab:
     - target: {fileID: 224579018821878906, guid: f9b9d58e259714f229a44d0fcceec244,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 437.33337
+      value: 65.111084
       objectReference: {fileID: 0}
     - target: {fileID: 1824120585181274, guid: f9b9d58e259714f229a44d0fcceec244, type: 2}
       propertyPath: m_IsActive
@@ -693,6 +705,10 @@ Prefab:
         type: 2}
       propertyPath: preferFrontFacing
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1824120585181274, guid: f9b9d58e259714f229a44d0fcceec244, type: 2}
+      propertyPath: m_TagString
+      value: WebCam
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f9b9d58e259714f229a44d0fcceec244, type: 2}
@@ -1337,6 +1353,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cube: {fileID: 1659074398}
   parent: {fileID: 281057962}
+  upc: 
 --- !u!1 &849350589
 GameObject:
   m_ObjectHideFlags: 0
@@ -1986,6 +2003,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1117101958}
+  - component: {fileID: 1117101959}
   m_Layer: 0
   m_Name: Labels
   m_TagString: Untagged
@@ -2011,6 +2029,19 @@ Transform:
   m_Father: {fileID: 938696421}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1117101959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1117101957}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05989d94ff5e84c9d92ec78302f3d35f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  labels: {fileID: 1117101957}
+  wall: {fileID: 94609335}
 --- !u!1 &1142816886
 GameObject:
   m_ObjectHideFlags: 0
