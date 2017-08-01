@@ -22,24 +22,23 @@ public class SugarCubesManagement : MonoBehaviour {
         newSugar.transform.GetChild(0).GetComponent<SugarCubes>().upc = upc;
         return newSugar.transform.GetChild(0).GetComponent<SugarCubes>();
     }
-    static public SugarCubes NewSugarDisplay(string upc, GameObject popup) {
+    static public SugarCubes NewSugarDisplay(string upc, PopUp popup) {
             if (Unique.Displays.ContainsKey(upc))
             {
                 return (SugarCubes)Unique.Displays[upc];
             }
-            GameObject newSugar = Instantiate(sampleSugar, popup.transform);
-            newSugar.transform.localPosition = popup.transform.position + Vector3.right * 100;
+		GameObject newSugar = Instantiate(sampleSugar, popup.parent.transform);
+		newSugar.transform.forward = Vector3.down;
             newSugar.SetActive(true);
             Unique.Displays.Add(upc, newSugar.transform.GetChild(0).GetComponent<SugarCubes>());
             newSugar.transform.GetChild(0).GetComponent<SugarCubes>().upc = upc;
             return newSugar.transform.GetChild(0).GetComponent<SugarCubes>();
     }
-    static public SugarCubes NewSugarDisplay(string upc, GameObject popup, Vector3 spaceCoor) {
+	static public SugarCubes NewSugarDisplay(string upc, PopUp popup, Vector3 spaceCoor) {
         if (Unique.Displays.ContainsKey(upc)) {
             return (SugarCubes)Unique.Displays[upc];
         }
-        GameObject newSugar = Instantiate(sampleSugar, popup.transform);
-
+		GameObject newSugar = Instantiate(sampleSugar, popup.parent.transform);
         newSugar.SetActive(true);
         newSugar.transform.localPosition = spaceCoor;
         Unique.Displays.Add(upc, newSugar.transform.GetChild(0).GetComponent<SugarCubes>());

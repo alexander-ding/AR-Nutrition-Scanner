@@ -738,6 +738,10 @@ void RegisterAllStrippedInternalCalls()
 		void Register_UnityEngine_Camera_INTERNAL_CALL_ScreenToViewportPoint();
 		Register_UnityEngine_Camera_INTERNAL_CALL_ScreenToViewportPoint();
 
+		//System.Void UnityEngine.Camera::INTERNAL_CALL_ScreenToWorldPoint(UnityEngine.Camera,UnityEngine.Vector3&,UnityEngine.Vector3&)
+		void Register_UnityEngine_Camera_INTERNAL_CALL_ScreenToWorldPoint();
+		Register_UnityEngine_Camera_INTERNAL_CALL_ScreenToWorldPoint();
+
 		//System.Void UnityEngine.Camera::INTERNAL_get_pixelRect(UnityEngine.Rect&)
 		void Register_UnityEngine_Camera_INTERNAL_get_pixelRect();
 		Register_UnityEngine_Camera_INTERNAL_get_pixelRect();
@@ -825,6 +829,10 @@ void RegisterAllStrippedInternalCalls()
 		//System.Int32 UnityEngine.Canvas::get_targetDisplay()
 		void Register_UnityEngine_Canvas_get_targetDisplay();
 		Register_UnityEngine_Canvas_get_targetDisplay();
+
+		//System.Single UnityEngine.Canvas::get_planeDistance()
+		void Register_UnityEngine_Canvas_get_planeDistance();
+		Register_UnityEngine_Canvas_get_planeDistance();
 
 		//System.Single UnityEngine.Canvas::get_referencePixelsPerUnit()
 		void Register_UnityEngine_Canvas_get_referencePixelsPerUnit();
@@ -1393,6 +1401,10 @@ void RegisterAllStrippedInternalCalls()
 		//UnityEngine.GameObject UnityEngine.GameObject::Find(System.String)
 		void Register_UnityEngine_GameObject_Find();
 		Register_UnityEngine_GameObject_Find();
+
+		//UnityEngine.GameObject UnityEngine.GameObject::FindGameObjectWithTag(System.String)
+		void Register_UnityEngine_GameObject_FindGameObjectWithTag();
+		Register_UnityEngine_GameObject_FindGameObjectWithTag();
 
 		//UnityEngine.Transform UnityEngine.GameObject::get_transform()
 		void Register_UnityEngine_GameObject_get_transform();
@@ -2640,6 +2652,26 @@ void RegisterAllStrippedInternalCalls()
 
 	//End Registrations for type : UnityEngine.Playables.PlayableOutputHandle
 
+	//Start Registrations for type : UnityEngine.PlayerPrefs
+
+		//System.Boolean UnityEngine.PlayerPrefs::TrySetFloat(System.String,System.Single)
+		void Register_UnityEngine_PlayerPrefs_TrySetFloat();
+		Register_UnityEngine_PlayerPrefs_TrySetFloat();
+
+		//System.Boolean UnityEngine.PlayerPrefs::TrySetInt(System.String,System.Int32)
+		void Register_UnityEngine_PlayerPrefs_TrySetInt();
+		Register_UnityEngine_PlayerPrefs_TrySetInt();
+
+		//System.Int32 UnityEngine.PlayerPrefs::GetInt(System.String,System.Int32)
+		void Register_UnityEngine_PlayerPrefs_GetInt();
+		Register_UnityEngine_PlayerPrefs_GetInt();
+
+		//System.Single UnityEngine.PlayerPrefs::GetFloat(System.String,System.Single)
+		void Register_UnityEngine_PlayerPrefs_GetFloat();
+		Register_UnityEngine_PlayerPrefs_GetFloat();
+
+	//End Registrations for type : UnityEngine.PlayerPrefs
+
 	//Start Registrations for type : UnityEngine.QualitySettings
 
 		//System.Int32 UnityEngine.QualitySettings::get_antiAliasing()
@@ -2673,6 +2705,10 @@ void RegisterAllStrippedInternalCalls()
 		//System.Void UnityEngine.Quaternion::INTERNAL_CALL_Inverse(UnityEngine.Quaternion&,UnityEngine.Quaternion&)
 		void Register_UnityEngine_Quaternion_INTERNAL_CALL_Inverse();
 		Register_UnityEngine_Quaternion_INTERNAL_CALL_Inverse();
+
+		//System.Void UnityEngine.Quaternion::INTERNAL_CALL_LookRotation(UnityEngine.Vector3&,UnityEngine.Vector3&,UnityEngine.Quaternion&)
+		void Register_UnityEngine_Quaternion_INTERNAL_CALL_LookRotation();
+		Register_UnityEngine_Quaternion_INTERNAL_CALL_LookRotation();
 
 	//End Registrations for type : UnityEngine.Quaternion
 
@@ -3558,6 +3594,10 @@ void RegisterAllStrippedInternalCalls()
 
 	//Start Registrations for type : UnityEngine.WebCamTexture
 
+		//System.Boolean UnityEngine.WebCamTexture::get_didUpdateThisFrame()
+		void Register_UnityEngine_WebCamTexture_get_didUpdateThisFrame();
+		Register_UnityEngine_WebCamTexture_get_didUpdateThisFrame();
+
 		//System.Boolean UnityEngine.WebCamTexture::get_videoVerticallyMirrored()
 		void Register_UnityEngine_WebCamTexture_get_videoVerticallyMirrored();
 		Register_UnityEngine_WebCamTexture_get_videoVerticallyMirrored();
@@ -3573,6 +3613,10 @@ void RegisterAllStrippedInternalCalls()
 		//System.Void UnityEngine.WebCamTexture::Internal_CreateWebCamTexture(UnityEngine.WebCamTexture,System.String,System.Int32,System.Int32,System.Int32)
 		void Register_UnityEngine_WebCamTexture_Internal_CreateWebCamTexture();
 		Register_UnityEngine_WebCamTexture_Internal_CreateWebCamTexture();
+
+		//UnityEngine.Color32[] UnityEngine.WebCamTexture::GetPixels32(UnityEngine.Color32[])
+		void Register_UnityEngine_WebCamTexture_GetPixels32();
+		Register_UnityEngine_WebCamTexture_GetPixels32();
 
 		//UnityEngine.WebCamDevice[] UnityEngine.WebCamTexture::get_devices()
 		void Register_UnityEngine_WebCamTexture_get_devices();

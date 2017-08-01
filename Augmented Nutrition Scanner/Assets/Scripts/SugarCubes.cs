@@ -14,13 +14,14 @@ public class SugarCubes : MonoBehaviour {
     private float _deltaY;
 	// Use this for initialization
 	void Start () {
+		RetainOrientation ();
 	}
 	public void Test(int total) {
 		MakeSugarCubes ((uint)total, new Vector3(0, 40, 0)); // (height - 1) * 2
 	}
     // deltaXZ: weight * 3/2; deltaY: (height-1)*1.5
     public void MakeSugarCubes(uint total, Vector3 coord, float deltaXZ = 10f, float deltaY = 30f, uint frame = 60) {
-	    
+		Transform tf = GameObject.FindGameObjectWithTag ("Wall").transform;
 		if (IsGenerating ()) {
 			_total += total;
 		} else {
@@ -31,7 +32,11 @@ public class SugarCubes : MonoBehaviour {
         }
         _frame = frame; _currentFrame = 1; _coord = coord; _deltaXZ = deltaXZ; _deltaY = deltaY;
     }
+	private void RetainOrientation() {
+		parent.transform.forward = Vector3.forward;
+	}
 	void Update () {
+		RetainOrientation ();
 		if (IsGenerating())
 			NewSugarCubes (CalculateNumbers());
 	}
