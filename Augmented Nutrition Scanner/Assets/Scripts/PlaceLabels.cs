@@ -10,6 +10,7 @@ public class PlaceLabels : MonoBehaviour {
 	void Start () {
 		Place ();
 	}
+	public void Place() {
 		float current = NutritionMax.GetMax("sugar");
 		float y = current / HEIGHT * wall.transform.localPosition.y;
 		labels.transform.localPosition = new Vector3 (labels.transform.localPosition.x, y, labels.transform.localPosition.z);
