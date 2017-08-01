@@ -6,6 +6,7 @@ TagManager:
   tags:
   - WebCam
   - Wall
+  - Cylinder
   layers:
   - Default
   - TransparentFX
