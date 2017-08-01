@@ -60,6 +60,7 @@ public class PopUp : MonoBehaviour {
     }
 
     public void DisplaySugar() {
+        if (Unique.Displays.Contains(upc)) return;
         ProgressBar selected = GetProgressBar("sugar");
 		float x = parent.GetComponent<RectTransform>().sizeDelta.x / 2  + 70f;
 		float y = -parent.GetComponent<RectTransform> ().sizeDelta.y / 4;
