@@ -63,6 +63,7 @@
      <Compile Include="Assets\NuvuAssets\Scripts\PlayAudioOnHit.cs" />
      <Compile Include="Assets\NuvuAssets\Scripts\PlayAudioOnRelease.cs" />
      <Compile Include="Assets\NuvuAssets\Scripts\ReadPhoneData.cs" />
+     <Compile Include="Assets\NuvuAssets\Scripts\ServingAllButton.cs" />
      <Compile Include="Assets\NuvuAssets\Scripts\TouchToRaycast.cs" />
      <Compile Include="Assets\NuvuAssets\Scripts\TransportOnHit.cs" />
      <Compile Include="Assets\NuvuAssets\Scripts\TriggerToRaycast.cs" />
@@ -102,11 +103,13 @@
      <Compile Include="Assets\OVR\Scripts\Util\OVRWaitCursor.cs" />
      <Compile Include="Assets\Scripts\BarcodeScanner.cs" />
      <Compile Include="Assets\Scripts\BarInfo.cs" />
+     <Compile Include="Assets\Scripts\CylinderBar.cs" />
      <Compile Include="Assets\Scripts\JSONManagement.cs" />
      <Compile Include="Assets\Scripts\NutritionMax.cs" />
      <Compile Include="Assets\Scripts\PlaceLabels.cs" />
      <Compile Include="Assets\Scripts\PopUp.cs" />
      <Compile Include="Assets\Scripts\PopUpManagement.cs" />
+     <Compile Include="Assets\Scripts\ServingAllButton.cs" />
      <Compile Include="Assets\Scripts\SugarCubes.cs" />
      <Compile Include="Assets\Scripts\SugarCubesManagement.cs" />
      <Compile Include="Assets\Scripts\Unique.cs" />
