@@ -49,6 +49,9 @@ public class PopUp : MonoBehaviour {
 		Debug.Log ("Reject button clicked");
         Destroy();
 	}
+    public void MoreBtnHandle() {
+        Debug.Log("Reject button clicked");
+    }
     public void Destroy() {
 		SugarCubes sugar = null;
 		sugar = parent.transform.GetComponentInChildren<SugarCubes> ();
