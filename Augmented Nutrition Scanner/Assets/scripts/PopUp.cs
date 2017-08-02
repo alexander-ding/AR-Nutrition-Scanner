@@ -50,7 +50,7 @@ public class PopUp : MonoBehaviour {
         Destroy();
 	}
     public void MoreBtnHandle() {
-        Debug.Log("Reject button clicked");
+        Debug.Log("More button clicked");
     }
     public void Destroy() {
 		SugarCubes sugar = null;
@@ -134,14 +134,8 @@ public class ProgressBar {
 		progressBar.GetComponent<Image> ().color = Unique.BarInfos [name].barColor;
 		rowImage.sprite = Unique.BarInfos [name].picture;
 		unit = Unique.BarInfos [name].unit;
-		nameBox.text = UppercaseFirst(name);
+		nameBox.text = Utils.UppercaseFirst(name);
         barWidth = progressBar.rectTransform.sizeDelta.x;
-	}
-	private string UppercaseFirst(string s) {
-		if (string.IsNullOrEmpty(s)) {
-			return string.Empty;
-		}
-		return char.ToUpper(s[0]) + s.Substring(1);
 	}
 	public void UpdateBar() {
 		if ((progressBar.rectTransform.sizeDelta.x != targetWidth) && (currentFrame <= targetFrame)) {
@@ -184,6 +178,6 @@ public class ProgressBar {
 			new Vector3 (percentage * barWidth, progressBar.rectTransform.sizeDelta.y);
 	}
 	private void SetText() {
-		unitBox.text = string.Format("{0:N3}", current) + " " + unit;
+		unitBox.text = current.ToString() + " " + unit;
 	}
 }

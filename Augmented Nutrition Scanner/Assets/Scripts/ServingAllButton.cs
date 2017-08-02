@@ -3,19 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 public class ServingAllButton : MonoBehaviour {
+	public NutritionPage page;
 	public Image btn;
 	private bool state; // true = all; false = servings
 	// Use this for initialization
 	void Start () {
-		CheckState ();
+		state = CheckState ();
 		RespondToState ();
 	}
-	void CheckState() {
+	public static bool CheckState() {
 		int temp = PlayerPrefs.GetInt ("serving/all");
 		if (temp == 1) {
-			state = true;
+			return true;
 		} else {
-			state = false;
+			return false;
 		}
 	}
 	void SetState() {
@@ -38,6 +39,7 @@ public class ServingAllButton : MonoBehaviour {
 		state = !state;
 		SetState ();
 		RespondToState ();
+		page.SetValues ();
 	}
 	// Update is called once per frame
 	void Update () {

@@ -71,7 +71,7 @@ public class BarcodeScanner : MonoBehaviour {
 			screenPointAvg += new Vector2 (point.X, point.Y);
 		}
 		screenPointAvg /= points.Length;
-		float dist = GameObject.FindGameObjectWithTag ("WebCam").GetComponent<Canvas> ().planeDistance - 100f;
+		float dist = GameObject.FindGameObjectWithTag ("WebCam").GetComponent<Canvas> ().planeDistance / 1.8f;
 		Debug.Log (dist);
 		Vector3 input = new Vector3 (screenPointAvg.x, screenPointAvg.y, dist);
 		PopUpManagement.NewPopUp(upc, Camera.main.ScreenToWorldPoint (input));
