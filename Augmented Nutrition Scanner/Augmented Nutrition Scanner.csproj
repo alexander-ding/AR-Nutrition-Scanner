@@ -140,9 +140,11 @@
     <Compile Include="Assets\Scripts\BarcodeScanner.cs" />
     <Compile Include="Assets\Scripts\BarInfo.cs" />
     <Compile Include="Assets\Scripts\CaloriesPage.cs" />
+    <Compile Include="Assets\Scripts\colorArrayRotate.cs" />
     <Compile Include="Assets\Scripts\CylinderBar.cs" />
     <Compile Include="Assets\Scripts\JSONManagement.cs" />
     <Compile Include="Assets\Scripts\MiddleManagement.cs" />
+    <Compile Include="Assets\Scripts\MoreInfoManagement.cs" />
     <Compile Include="Assets\Scripts\NutritionMax.cs" />
     <Compile Include="Assets\Scripts\NutritionPage.cs" />
     <Compile Include="Assets\Scripts\OverviewPage.cs" />
@@ -154,12 +156,15 @@
     <Compile Include="Assets\Scripts\PopUp.cs" />
     <Compile Include="Assets\Scripts\PopUpManagement.cs" />
     <Compile Include="Assets\Scripts\RedirectToPage.cs" />
+    <Compile Include="Assets\Scripts\ReturnBtn.cs" />
     <Compile Include="Assets\Scripts\ServingAllButton.cs" />
+    <Compile Include="Assets\Scripts\StartManagement.cs" />
     <Compile Include="Assets\Scripts\SugarCubes.cs" />
     <Compile Include="Assets\Scripts\SugarCubesManagement.cs" />
     <Compile Include="Assets\Scripts\SwappableManagement.cs" />
     <Compile Include="Assets\Scripts\SwipeControl.cs" />
     <Compile Include="Assets\Scripts\Swiper.cs" />
+    <Compile Include="Assets\Scripts\UnchangedManagement.cs" />
     <Compile Include="Assets\Scripts\Unique.cs" />
     <Compile Include="Assets\Scripts\User Info\ageScript.cs" />
     <Compile Include="Assets\Scripts\User Info\example.cs" />

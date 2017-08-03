@@ -16,6 +16,7 @@ const (
 var apiClient = &http.Client{Timeout: 100 * time.Second}
 
 type handler struct {
+	which bool
 }
 
 func (h *handler) apiServe(w http.ResponseWriter, r *http.Request) {
@@ -26,7 +27,8 @@ func (h *handler) apiServe(w http.ResponseWriter, r *http.Request) {
 	}
 }
 func (h *handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, `{
+	if h.which {
+		fmt.Fprintf(w, `{
   "old_api_id": null,
   "item_id": "51c3d78797c3e6d8d3b546cf",
   "item_name": "Cola, Cherry",
@@ -69,10 +71,57 @@ func (h *handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
   "allergen_contains_gluten": null,
   "usda_fields": null
 }`)
+	} else {
+		fmt.Fprintf(w, `{
+  "old_api_id": null,
+  "item_id": "576d079988f1944051a3bbba",
+  "item_name": "Light with Blue Cheese",
+  "leg_loc_id": null,
+  "brand_id": "51db37b8176fe9790a898a98",
+  "brand_name": "The Laughing Cow",
+  "item_description": null,
+  "updated_at": "2016-06-24T19:44:35.000Z",
+  "nf_ingredient_statement": null,
+  "nf_water_grams": null,
+  "nf_calories": 24.12,
+  "nf_calories_from_fat": 12.6,
+  "nf_total_fat": 1.4,
+  "nf_saturated_fat": 0.9,
+  "nf_trans_fatty_acid": null,
+  "nf_polyunsaturated_fat": null,
+  "nf_monounsaturated_fat": null,
+  "nf_cholesterol": null,
+  "nf_sodium": 104,
+  "nf_total_carbohydrate": 0.9,
+  "nf_dietary_fiber": null,
+  "nf_sugars": 0.9,
+  "nf_protein": 2.1,
+  "nf_vitamin_a_dv": null,
+  "nf_vitamin_c_dv": null,
+  "nf_calcium_dv": null,
+  "nf_iron_dv": null,
+  "nf_refuse_pct": null,
+  "nf_servings_per_container": null,
+  "nf_serving_size_qty": 16,
+  "nf_serving_size_unit": "g Triangle",
+  "nf_serving_weight_grams": 16,
+  "allergen_contains_milk": null,
+  "allergen_contains_eggs": null,
+  "allergen_contains_fish": null,
+  "allergen_contains_shellfish": null,
+  "allergen_contains_tree_nuts": null,
+  "allergen_contains_peanuts": null,
+  "allergen_contains_wheat": null,
+  "allergen_contains_soybeans": null,
+  "allergen_contains_gluten": null,
+  "usda_fields": null
+}`)
+	}
+	h.which = !h.which
 }
 func main() {
 	// for now
-	serverHandler := handler{}
+	serverHandler := handler{which: true}
 	http.ListenAndServe(":1234", &serverHandler)
 }
 

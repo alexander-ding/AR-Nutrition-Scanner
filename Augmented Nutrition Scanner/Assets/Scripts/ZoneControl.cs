@@ -7,7 +7,7 @@ public class ZoneControl : MonoBehaviour {
 	public string nutritionName;
 	private NutritionJSON nutrition = null;
 	private Text percentageText;
-	private Image circleImage;
+	public Image circleImage;
 
 	private const int frameCount = 60;
 	private float maxVal;
@@ -18,6 +18,7 @@ public class ZoneControl : MonoBehaviour {
 	void Start () {
 		percentageText = transform.Find ("%").GetComponent<Text> ();
 		circleImage = transform.Find ("Circle").GetComponent<Image> ();
+        Debug.Log(circleImage);
 	}
 	public void Initialize(NutritionJSON input) {
 		nutrition = input;
