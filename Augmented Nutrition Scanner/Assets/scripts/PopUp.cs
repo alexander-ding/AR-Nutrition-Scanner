@@ -139,7 +139,7 @@ public class ProgressBar {
 	}
 	public void UpdateBar() {
 		if ((progressBar.rectTransform.sizeDelta.x != targetWidth) && (currentFrame <= targetFrame)) {
-            if (Mathf.Abs(targetWidth - progressBar.rectTransform.sizeDelta.x) < (targetWidth - startWidth) / targetFrame)
+            if (Mathf.Abs(targetWidth - progressBar.rectTransform.sizeDelta.x) <= (targetWidth - startWidth) / targetFrame)
             {
                 progressBar.rectTransform.sizeDelta.Set (targetWidth, progressBar.rectTransform.sizeDelta.y);
             } else

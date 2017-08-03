@@ -17,5 +17,12 @@ public class Unique {
 		{"sugar", new BarInfo("sugar", "g", BarInfo.StringToColor("#33CC33FF"))},
 		{"unknown", new BarInfo("unknown", "", BarInfo.StringToColor("#E2BFA9FF"))},
 	};
-    
+    static public Dictionary<string, int> StringToIndices = new Dictionary<string, int>() {
+        {"overview", 0},
+        {"calories", 1},
+        {"sodium", 2},
+        {"sugar", 3},
+        {"fat", 4},
+        {"protein", 5},
+    };
 }

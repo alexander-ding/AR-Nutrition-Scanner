@@ -58,7 +58,7 @@ public class CylinderBar : MonoBehaviour {
 	// Update is called once per frame
 	void TryStep() {
 		float current = self.fillAmount;
-		if (Mathf.Abs (current - destination) < Mathf.Abs (step)) {
+		if (Mathf.Abs (current - destination) <= Mathf.Abs (step)) {
 			SetTo (destination);
 			SetText ();
 		} else {

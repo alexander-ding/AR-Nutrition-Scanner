@@ -3,69 +3,117 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class SwappableManagement : MonoBehaviour {
-	public CaloriesPage calories; 
-	public NutritionPage protein;
-	public NutritionPage fat;
-	public NutritionPage sugar;
-	public NutritionPage sodium;
-	public OverviewPage overview;
-
+    public MiddleManagement[] pages;
+    private const int frames = 60;
+    private NutritionJSON nutrition;
+    private float width;
+    private List<Swiper> swipers = new List<Swiper>();
+    private MiddleManagement currentPage;
 	// Use this for initialization
 	void Start () {
-		
+        GetWidth();
+        foreach (MiddleManagement page in pages)
+        {
+            Debug.Log("Type: " + page.type);
+        }
+        MockJSON();
 	}
-	public void SwipeIn(string input) {
-		Debug.Log ("registered click");
-		switch(input) {
-		case "calories":
-			_SwipeInCalories ();
-			break;
-		case "overview":
-			_SwipeInOverview ();
-			break;
-		case "protein":
-			_SwipeInNutrition (protein);
-			break;
-		case "fat":
-			_SwipeInNutrition (fat);
-			break;
-		case "sugar":
-			_SwipeInNutrition (sugar);
-			break;
-		case "sodium":
-			_SwipeInNutrition (sodium);
-			break;
-		default: 
-			_SwipeInOverview ();
-			break;
-		}
+    public void Initialize(NutritionJSON input)
+    {
+        nutrition = input;
+        foreach (MiddleManagement page in pages) {
+            page.Initialize(input);
+        }
+        for (int index = 0; index < pages.Length; index++)
+        {
+            if (pages[index].type != 0)
+            {
+                SetRight(index);
+                pages[index].gameObject.SetActive(false);
+            }
+        }
+        currentPage = pages[0];
+        SetValues();
+    }
+    void GetWidth() { width = Screen.width; } // to be fixed
+    void SetRight(int index) {
+        GetWidth();
+        RectTransform tf = pages[index].gameObject.GetComponent<RectTransform>();
+        tf.localPosition = new Vector3 (width, 0, 0);
+    }
+    public void DisableExcept(int index) {
+        for (int i = 0; i < pages.Length; i++) {
+            if (i != index)
+            {
+                pages[i].gameObject.SetActive(false);
+            }
+        }
+    }
+    public void SwipeInLeft(string input) {
+        int index;
+        Unique.StringToIndices.TryGetValue(input, out index);
+        _SwipeInLeft(index);
 	}
-	void _SwipeInCalories() {
-		overview.transform.gameObject.SetActive (false);
-		calories.transform.gameObject.SetActive (true);
-	}
-	void _SwipeInNutrition(NutritionPage page) {
-		overview.transform.gameObject.SetActive (false);
-		page.transform.gameObject.SetActive (true);
-	}
-	void _SwipeInOverview() {
-		calories.transform.gameObject.SetActive (false);
-		protein.transform.gameObject.SetActive (false);
-		fat.transform.gameObject.SetActive (false);
-		sodium.transform.gameObject.SetActive (false);
-		sugar.transform.gameObject.SetActive (false);
-		overview.transform.gameObject.SetActive (true);
-	}
-	void SetValues() {
-		calories.SetValues ();
-		protein.SetValues ();
-		fat.SetValues ();
-		sodium.SetValues ();
-		sugar.SetValues ();
-		overview.SetValues ();
+
+    void _SwipeInLeft(int index) {
+        pages[index].gameObject.SetActive(true);
+
+        Swiper swiper = new Swiper(this, pages[index], 0f, index);
+        swipers.Add(swiper);
+        pages[index].SetValue();
+    }
+    public void SwipeInRight(string input)
+    {
+        int index;
+        Unique.StringToIndices.TryGetValue(input, out index);
+        _SwipeInRight(index);
+    }
+    void _SwipeInRight(int index)
+    {
+        pages[index].gameObject.SetActive(true);
+        GetWidth();
+        Swiper swiper = new Swiper(this, pages[index], width, index);
+        swipers.Add(swiper);
+        pages[index].SetValue();
+    }
+
+    void SetValues() {
+        foreach (MiddleManagement page in pages) {
+            page.SetValue();
+        }
 	}
 	// Update is called once per frame
 	void Update () {
-		
-	}
+		foreach (Swiper swiper in swipers) {
+            swiper.Update();
+        }
+        foreach (Swiper swiper in swipers)
+        {
+            if (!swiper.ShouldStep()) {
+                swipers.Remove(swiper);
+            }
+        }
+    }
+    void MockJSON()
+    {
+        var headers = new Dictionary<string, string> { };
+        headers.Add("X-Mashape-Authorization", Unique.ApiKey);
+        WWW www = new WWW(Unique.Home + "/item?upc=" + "123", null, headers);
+
+        StartCoroutine(WaitForRequest(www));
+    }
+    IEnumerator WaitForRequest(WWW www)
+    {
+        yield return www;
+        if (www.error == "")
+        {
+            nutrition = JsonUtility.FromJson<NutritionJSON>(www.text);
+            Initialize(nutrition);
+        }
+        else
+        {
+            Debug.Log("WWW Error: " + www.error);
+        }
+
+    }
 }

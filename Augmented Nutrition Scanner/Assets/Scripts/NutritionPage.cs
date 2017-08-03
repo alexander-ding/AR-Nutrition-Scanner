@@ -13,26 +13,8 @@ public class NutritionPage : MonoBehaviour {
 	private NutritionJSON nutrition;
 	// Use this for initialization
 	void Start () {
-		MockJSON ();
 	}
-	void MockJSON() {
-		var headers = new Dictionary<string, string>{};
-		headers.Add ("X-Mashape-Authorization", Unique.ApiKey);
-		WWW www = new WWW (Unique.Home + "/item?upc=" + "123", null, headers);
-
-		StartCoroutine (WaitForRequest (www));
-	}
-	IEnumerator WaitForRequest(WWW www) {
-		yield return www;
-		if (www.error == "") {
-			nutrition = JsonUtility.FromJson<NutritionJSON> (www.text);
-			Initialize (nutrition);
-		} else {
-			Debug.Log ("WWW Error: " + www.error);
-		}
-
-	}
-	void Initialize(NutritionJSON input) {
+	public void Initialize(NutritionJSON input) {
 		nutrition = input;
 		icon = nameText.gameObject.GetComponentInChildren<Image>();
 		SetValues ();

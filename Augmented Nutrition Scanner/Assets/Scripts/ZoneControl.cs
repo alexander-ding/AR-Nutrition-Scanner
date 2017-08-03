@@ -14,27 +14,10 @@ public class ZoneControl : MonoBehaviour {
 	private float destination = 0f;
 	private float step = 0f;
 	// Use this for initialization
-	void MockJSON() {
-		var headers = new Dictionary<string, string>{};
-		headers.Add ("X-Mashape-Authorization", Unique.ApiKey);
-		WWW www = new WWW (Unique.Home + "/item?upc=" + "123", null, headers);
-
-		StartCoroutine (WaitForRequest (www));
-	}
-	IEnumerator WaitForRequest(WWW www) {
-		yield return www;
-		if (www.error == "") {
-			nutrition = JsonUtility.FromJson<NutritionJSON> (www.text);
-			Initialize (nutrition);
-		} else {
-			Debug.Log ("WWW Error: " + www.error);
-		}
-
-	}
+	
 	void Start () {
 		percentageText = transform.Find ("%").GetComponent<Text> ();
 		circleImage = transform.Find ("Circle").GetComponent<Image> ();
-		MockJSON ();
 	}
 	public void Initialize(NutritionJSON input) {
 		nutrition = input;
@@ -80,7 +63,7 @@ public class ZoneControl : MonoBehaviour {
 	}
 	void TryStep() {
 		float current = circleImage.fillAmount;
-		if (Mathf.Abs (current - destination) < Mathf.Abs (step)) {
+		if (Mathf.Abs (current - destination) <= Mathf.Abs (step)) {
 			SetTo (destination);
 			SetText ();
 		} else {
