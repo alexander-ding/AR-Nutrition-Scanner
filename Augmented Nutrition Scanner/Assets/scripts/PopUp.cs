@@ -51,7 +51,14 @@ public class PopUp : MonoBehaviour {
 	}
     public void MoreBtnHandle() {
         Debug.Log("More button clicked");
+		LoadMoreInfo ();
     }
+
+	public void LoadMoreInfo() {
+		NutritionJSON nutrition = transform.parent.GetComponentInChildren<JSONManagement> ().nutrition;
+		StartManagement.DisableCamera ();
+		StartManagement.sampleMoreInfo.GetComponent<MoreInfoManagement>().NewMoreInfo (nutrition);
+	}
     public void Destroy() {
 		SugarCubes sugar = null;
 		sugar = parent.transform.GetComponentInChildren<SugarCubes> ();
@@ -74,7 +81,7 @@ public class PopUp : MonoBehaviour {
 	private void InitializeBars() {
 		for (int i = 0; i < rows.transform.childCount; i++) {
 			GameObject row = rows.transform.GetChild (i).gameObject;
-			bars.Add(barNames[i], new ProgressBar (row, barNames[i], 100f));
+			bars.Add(barNames[i], new ProgressBar (row, barNames[i], NutritionMax.GetMax(barNames[i])));
 		}
 
 		foreach (KeyValuePair<string, ProgressBar> entry in bars) {

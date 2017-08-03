@@ -14,12 +14,6 @@ public class ageScript : MonoBehaviour
 		if (int.TryParse(inputAge, out age))
 		{  
 			ageCheck = true;
-			Debug.Log (age.ToString ());
 		}
-
-
 	}
-
-
-
 }

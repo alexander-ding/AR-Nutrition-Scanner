@@ -5,22 +5,16 @@ using UnityEngine;
 public class SwappableManagement : MonoBehaviour {
     public MiddleManagement[] pages;
     private const int frames = 60;
-    private NutritionJSON nutrition;
     private float width;
     private List<Swiper> swipers = new List<Swiper>();
-    private MiddleManagement currentPage;
+
+	private int loadedIndex = 0;
 	// Use this for initialization
 	void Start () {
         GetWidth();
-        foreach (MiddleManagement page in pages)
-        {
-            Debug.Log("Type: " + page.type);
-        }
-        MockJSON();
 	}
     public void Initialize(NutritionJSON input)
     {
-        nutrition = input;
         foreach (MiddleManagement page in pages) {
             page.Initialize(input);
         }
@@ -32,16 +26,20 @@ public class SwappableManagement : MonoBehaviour {
                 pages[index].gameObject.SetActive(false);
             }
         }
-        currentPage = pages[0];
-        SetValues();
+		loadedIndex = 0;
     }
-    void GetWidth() { width = Screen.width; } // to be fixed
+	public void SetValues() {
+		foreach (MiddleManagement page in pages) {
+			page.SetValues ();
+		}
+	}
+    void GetWidth() { width = Screen.width*2; } // to be fixed
     void SetRight(int index) {
         GetWidth();
         RectTransform tf = pages[index].gameObject.GetComponent<RectTransform>();
         tf.localPosition = new Vector3 (width, 0, 0);
     }
-    public void DisableExcept(int index) {
+    void DisableExcept(int index) {
         for (int i = 0; i < pages.Length; i++) {
             if (i != index)
             {
@@ -49,39 +47,40 @@ public class SwappableManagement : MonoBehaviour {
             }
         }
     }
-    public void SwipeInLeft(string input) {
+    public void SwipeNutrition(string input) {
+		GetWidth ();
         int index;
         Unique.StringToIndices.TryGetValue(input, out index);
-        _SwipeInLeft(index);
+		pages [index].gameObject.SetActive (true);
+        _Swipe(index, 0f);
+		_Swipe (0, -width);
+		loadedIndex = index;
 	}
-
-    void _SwipeInLeft(int index) {
-        pages[index].gameObject.SetActive(true);
-
-        Swiper swiper = new Swiper(this, pages[index], 0f, index);
-        swipers.Add(swiper);
-        pages[index].SetValue();
-    }
-    public void SwipeInRight(string input)
-    {
-        int index;
-        Unique.StringToIndices.TryGetValue(input, out index);
-        _SwipeInRight(index);
-    }
-    void _SwipeInRight(int index)
-    {
-        pages[index].gameObject.SetActive(true);
-        GetWidth();
-        Swiper swiper = new Swiper(this, pages[index], width, index);
-        swipers.Add(swiper);
-        pages[index].SetValue();
-    }
-
-    void SetValues() {
-        foreach (MiddleManagement page in pages) {
-            page.SetValue();
-        }
+	public void SwipeDashboard() {
+		GetWidth ();
+		pages [0].gameObject.SetActive (true);
+		_Swipe(loadedIndex, width);
+		_Swipe (0, 0);
+		loadedIndex = 0;
 	}
+	public void Done(int index) {
+		if (loadedIndex == index) {
+			DisableExcept (index);
+		}
+	}
+	public void TrySwipeDashboard() {
+		if (loadedIndex != 0) {
+
+			foreach (Swiper swiper in swipers) {
+				swipers.Remove (swiper);
+			}
+			SwipeDashboard ();
+		}
+	}
+    void _Swipe(int index, float destination) {
+        Swiper swiper = new Swiper(this, pages[index], destination, index);
+        swipers.Add(swiper);
+    }
 	// Update is called once per frame
 	void Update () {
 		foreach (Swiper swiper in swipers) {
@@ -93,27 +92,7 @@ public class SwappableManagement : MonoBehaviour {
                 swipers.Remove(swiper);
             }
         }
-    }
-    void MockJSON()
-    {
-        var headers = new Dictionary<string, string> { };
-        headers.Add("X-Mashape-Authorization", Unique.ApiKey);
-        WWW www = new WWW(Unique.Home + "/item?upc=" + "123", null, headers);
-
-        StartCoroutine(WaitForRequest(www));
-    }
-    IEnumerator WaitForRequest(WWW www)
-    {
-        yield return www;
-        if (www.error == "")
-        {
-            nutrition = JsonUtility.FromJson<NutritionJSON>(www.text);
-            Initialize(nutrition);
-        }
-        else
-        {
-            Debug.Log("WWW Error: " + www.error);
-        }
 
     }
+
 }

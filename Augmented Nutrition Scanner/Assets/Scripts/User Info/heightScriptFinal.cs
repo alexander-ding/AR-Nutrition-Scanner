@@ -22,7 +22,6 @@ public class heightScriptFinal : MonoBehaviour {
 
 			}
 			heightCheckFinal = true;
-			Debug.Log (height.ToString());
 		}
 	}
 }

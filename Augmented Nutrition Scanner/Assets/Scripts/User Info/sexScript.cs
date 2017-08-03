@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class sexScript : MonoBehaviour
 {
-    public bool sex;
+    static public bool sex;
     static public bool sexCheck;
 	public Button ButtonF;
 	public Button ButtonM;
@@ -23,6 +23,5 @@ public class sexScript : MonoBehaviour
 			ButtonF.interactable = true;
         }
         sexCheck = true;
-		Debug.Log (sex);
     }
 }

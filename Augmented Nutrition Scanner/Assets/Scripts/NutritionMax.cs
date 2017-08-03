@@ -41,11 +41,11 @@ public class NutritionMax:MonoBehaviour {
 		case "calories":
 			return BBE;
 		case "carbs":
-			return BBE * 0.6f;
+			return BBE * 0.6f / 4f;
 		case "sodium":
-			return 2.4f;
+			return 2400f;
 		case "fat":
-			return BBE * 0.3f;
+			return BBE * 0.3f / 9f;
 		case "protein":
 			return Weight * 0.9f;
 		case "sugar":

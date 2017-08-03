@@ -22,7 +22,6 @@ public class weightScriptFinal : MonoBehaviour {
 
 			}
 			weightCheckFinal = true;
-			Debug.Log (weight.ToString());
 	}
 }
 }

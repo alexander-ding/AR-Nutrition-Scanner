@@ -11,12 +11,14 @@ using ZXing.Common;
 public class BarcodeScanner : MonoBehaviour {
 	private static readonly List<BarcodeFormat>  Fmts = new List<BarcodeFormat> { BarcodeFormat.EAN_13, BarcodeFormat.EAN_8, BarcodeFormat.QR_CODE };
 
+	static public bool scanning;
 	private WebCamTexture camTexture = null;
 	private bool cameraWorking = false;
 	private Rect screenRect;
 	private void Start()
 	{
 		InvokeRepeating("Scan", 0f, 0.6f);
+		//PlayerPrefs.SetInt ("tutorialDone", 0);
 	}
 	void Update()
 	{
@@ -41,29 +43,39 @@ public class BarcodeScanner : MonoBehaviour {
 	void Scan()
 	{
 		if (camTexture == null || !cameraWorking) return;
+		if (!scanning) {
+			return;
+		}
+		Debug.Log ("Scanning");
 		// drawing the camera on screen
 		// GUI.DrawTexture(screenRect, camTexture, ScaleMode.ScaleToFit);
 		// do the reading — you might want to attempt to read less often than you draw on the screen for performance sake
-		try
-		{
-			BarcodeReader barcodeReader = new BarcodeReader
+		BarcodeReader barcodeReader = new BarcodeReader
 			{
 				Options =
 				{
 					PossibleFormats = Fmts,
 					ReturnCodabarStartEnd = true,
-					PureBarcode = false
+					PureBarcode = false,
+					TryHarder = true,
 				}
 				};
 			// decode the current frame
-			var result = barcodeReader.Decode(camTexture.GetPixels32(), camTexture.width, camTexture.height);
+			Color32[] colors = camTexture.GetPixels32();
+			var result = barcodeReader.Decode(colors, camTexture.width, camTexture.height);
 			if (result != null)
 			{
-				Debug.Log("DECODED TEXT: " +result.Text);
-				GeneratePopUp(result.Text, result.ResultPoints);
+				GeneratePopUp (result.Text, result.ResultPoints);
+				return; 
+
 			}
+				
+	}
+	ResultPoint[] RotateResult (ResultPoint[] points) {
+		for (int i = 0; i < points.Length; i++) {
+			points[i] = new ResultPoint(points[i].X, points[i].Y);
 		}
-		catch (UnityException ex) { Debug.LogWarning(ex.Message); }
+		return points;
 	}
 	void GeneratePopUp(string upc, ResultPoint[] points) {
 		Vector2 screenPointAvg = new Vector2 ();
@@ -72,7 +84,6 @@ public class BarcodeScanner : MonoBehaviour {
 		}
 		screenPointAvg /= points.Length;
 		float dist = GameObject.FindGameObjectWithTag ("WebCam").GetComponent<Canvas> ().planeDistance / 1.8f;
-		Debug.Log (dist);
 		Vector3 input = new Vector3 (screenPointAvg.x, screenPointAvg.y, dist);
 		PopUpManagement.NewPopUp(upc, Camera.main.ScreenToWorldPoint (input));
 	}

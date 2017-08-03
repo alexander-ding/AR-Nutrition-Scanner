@@ -14,7 +14,6 @@ public class JSONManagement : MonoBehaviour {
 		var headers = new Dictionary<string, string>{};
 		headers.Add ("X-Mashape-Authorization", Unique.ApiKey);
 		WWW www = new WWW (Unique.Home + "/item?upc=" + upc, null, headers);
-        
         StartCoroutine (WaitForRequest (www));
 	}
 	IEnumerator WaitForRequest(WWW www) {

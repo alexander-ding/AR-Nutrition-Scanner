@@ -5,10 +5,7 @@ class PopUpManagement : MonoBehaviour {
 	static public GameObject samplePopUp;
 	// Use this for initialization
 	void Start () {
-		samplePopUp = GameObject.Find ("PopUp");
-		samplePopUp.SetActive (false);
-		NewPopUp ("1231231");
-		NewPopUp ("12321", new Vector3 (400, 400, 0));
+		samplePopUp = Resources.Load<GameObject> ("Prefabs/PopUp");
 	}
     static public PopUp NewPopUp(string Upc) {
         if (Unique.PopUps.Contains(Upc)) {

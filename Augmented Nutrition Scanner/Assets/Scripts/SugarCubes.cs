@@ -65,6 +65,5 @@ public class SugarCubes : MonoBehaviour {
     public void Destroy() {
         Unique.Displays.Remove(upc);
         Object.Destroy(parent);
-        
     }
 }

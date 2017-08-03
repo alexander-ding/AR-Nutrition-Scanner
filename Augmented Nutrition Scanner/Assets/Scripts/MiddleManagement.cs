@@ -10,7 +10,6 @@ public class MiddleManagement : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
 	}
     public void Initialize(NutritionJSON input)
     {
@@ -27,20 +26,21 @@ public class MiddleManagement : MonoBehaviour {
                 return;
         }
     }
-    public void SetValue() {
-        switch (type)
-        {
-            case 0:
-                overviewPage.SetValues();
-                return;
-            case 1:
-                caloriesPage.SetValues();
-                return;
-            case 2:
-                nutritionPage.SetValues();
-                return;
-        }
-    }
+	public void SetValues()
+	{
+		switch (type)
+		{
+		case 0:
+			overviewPage.SetValues();
+			return;
+		case 1:
+			caloriesPage.SetValues();
+			return;
+		case 2:
+			nutritionPage.SetValues();
+			return;
+		}
+	}
 	// Update is called once per frame
 	void Update () {
 		

@@ -1,21 +1,16 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/ZoneControl.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/MoreInfoManagement.cs">
     <Files>
-      <File FileName="Assets/Scripts/ZoneControl.cs" Line="41" Column="31" />
-      <File FileName="Assets/Scripts/BarInfo.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/SugarCubes.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/ServingAllButton.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/NutritionMax.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/PopUp.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Unique.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/CylinderBar.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/MoreInfoManagement.cs" Line="11" Column="18" />
+      <File FileName="Assets/Scripts/BarcodeScanner.cs" Line="52" Column="11" />
+      <File FileName="Assets/Scripts/StartManagement.cs" Line="13" Column="51" />
+      <File FileName="Assets/Scripts/Panels/Panel4Switch.cs" Line="26" Column="51" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
-      <Breakpoint enabled="false" file="/Users/apple/Google Drive/GitHub/augmented_nutrition_scanner/Augmented Nutrition Scanner/Assets/Scripts/BarcodeScanner.cs" line="76" column="1" />
-      <Breakpoint enabled="false" file="/Users/apple/Google Drive/GitHub/augmented_nutrition_scanner/Augmented Nutrition Scanner/Assets/Scripts/BarcodeScanner.cs" line="59" column="1" />
+      <Breakpoint enabled="false" file="/Users/apple/Google Drive/GitHub/augmented_nutrition_scanner/Augmented Nutrition Scanner/Assets/Scripts/BarcodeScanner.cs" line="67" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

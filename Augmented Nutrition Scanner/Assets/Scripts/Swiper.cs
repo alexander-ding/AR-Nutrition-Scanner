@@ -8,7 +8,7 @@ public class Swiper {
     private float destination;
     private float step;
     private SwappableManagement parent;
-    public Swiper (SwappableManagement _parent, MiddleManagement pageToSwipe, float _destination, int _index, int _frames = 60) {
+    public Swiper (SwappableManagement _parent, MiddleManagement pageToSwipe, float _destination, int _index, int _frames = 20) {
         page = pageToSwipe.gameObject.GetComponent<RectTransform>();
         destination = _destination;
         step = (destination - page.localPosition.x) / _frames;
@@ -26,7 +26,7 @@ public class Swiper {
         } else {
             SetTo(current + step);
         }
-        if (!ShouldStep()) parent.DisableExcept(index);
+        if (!ShouldStep()) parent.Done(index);
     }
     // Update is called once per frame
 	public void Update () {

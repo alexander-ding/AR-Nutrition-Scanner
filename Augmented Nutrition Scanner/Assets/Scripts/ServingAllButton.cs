@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 public class ServingAllButton : MonoBehaviour {
-	public NutritionPage page;
+	public SwappableManagement page;
 	public Image btn;
 	private bool state; // true = all; false = servings
 	// Use this for initialization

@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class OverviewPage : MonoBehaviour {
 	public ZoneControl[] zones;
+	public NutritionJSON nutrition;
 	// Use this for initialization
 	void Start () {
 	}
-    public void Initialize(NutritionJSON nutrition) {
+    public void Initialize(NutritionJSON input) {
         foreach (ZoneControl zone in zones) {
-            zone.Initialize(nutrition);
+            zone.Initialize(input);
         }
-        SetValues();
     }
 	public void SetValues() {
 		foreach (ZoneControl zone in zones) {
