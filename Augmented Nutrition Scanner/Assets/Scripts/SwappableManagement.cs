@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SwappableManagement : MonoBehaviour {
     public MiddleManagement[] pages;
+	static public bool mutex = false;
     private const int frames = 60;
     private float width;
     private List<Swiper> swipers = new List<Swiper>();
@@ -15,6 +16,7 @@ public class SwappableManagement : MonoBehaviour {
 	}
     public void Initialize(NutritionJSON input)
     {
+		swipers.Clear ();
         foreach (MiddleManagement page in pages) {
             page.Initialize(input);
         }
@@ -33,7 +35,7 @@ public class SwappableManagement : MonoBehaviour {
 			page.SetValues ();
 		}
 	}
-    void GetWidth() { width = Screen.width*2; } // to be fixed
+    void GetWidth() { width = Screen.width; } // to be fixed
     void SetRight(int index) {
         GetWidth();
         RectTransform tf = pages[index].gameObject.GetComponent<RectTransform>();
@@ -56,12 +58,11 @@ public class SwappableManagement : MonoBehaviour {
 		_Swipe (0, -width);
 		loadedIndex = index;
 	}
-	public void SwipeDashboard() {
+	public void SwipeDashboard(int i) {
 		GetWidth ();
 		pages [0].gameObject.SetActive (true);
-		_Swipe(loadedIndex, width);
+		_Swipe(i, width);
 		_Swipe (0, 0);
-		loadedIndex = 0;
 	}
 	public void Done(int index) {
 		if (loadedIndex == index) {
@@ -70,29 +71,27 @@ public class SwappableManagement : MonoBehaviour {
 	}
 	public void TrySwipeDashboard() {
 		if (loadedIndex != 0) {
-
+			int i = loadedIndex;
+			loadedIndex = 0;
 			foreach (Swiper swiper in swipers) {
-				swipers.Remove (swiper);
+				swiper.Destroy ();
 			}
-			SwipeDashboard ();
+			swipers.Clear ();
+			SwipeDashboard (i);
 		}
 	}
     void _Swipe(int index, float destination) {
         Swiper swiper = new Swiper(this, pages[index], destination, index);
         swipers.Add(swiper);
     }
+	public void Destroy() {
+		Object.Destroy (this);
+	}
 	// Update is called once per frame
 	void Update () {
 		foreach (Swiper swiper in swipers) {
             swiper.Update();
         }
-        foreach (Swiper swiper in swipers)
-        {
-            if (!swiper.ShouldStep()) {
-                swipers.Remove(swiper);
-            }
-        }
-
     }
 
 }

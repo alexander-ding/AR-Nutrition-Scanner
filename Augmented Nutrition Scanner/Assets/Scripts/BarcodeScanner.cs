@@ -46,7 +46,6 @@ public class BarcodeScanner : MonoBehaviour {
 		if (!scanning) {
 			return;
 		}
-		Debug.Log ("Scanning");
 		// drawing the camera on screen
 		// GUI.DrawTexture(screenRect, camTexture, ScaleMode.ScaleToFit);
 		// do the reading — you might want to attempt to read less often than you draw on the screen for performance sake

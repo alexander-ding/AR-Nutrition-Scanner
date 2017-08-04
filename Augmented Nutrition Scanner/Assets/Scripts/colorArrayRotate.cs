@@ -17,8 +17,6 @@ public class ColorArrayRotate : MonoBehaviour {
 		colorResult = new Color32[colorSource.Length];
 
 		int count = 0;
-		int newWidth = height;
-		int newHeight = width;
 		int index = 0;
 
 		for (int i = 0; i < width; i++)

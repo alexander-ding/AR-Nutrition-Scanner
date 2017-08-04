@@ -32,9 +32,9 @@ public class NutritionPage : MonoBehaviour {
 		cylinder.Initialize (nutritionName);
 		float value = BarInfo.FromNutrition (nutritionName, nutrition);
 		if (isAll) {
-			cylinder.StepTo (value);
+			cylinder.StepTo (value * nutrition.nf_serving_size_qty);
 		} else {
-			cylinder.StepTo (value / nutrition.nf_serving_size_qty);
+			cylinder.StepTo (value);
 		}
 	}
 	void TextHandle(bool isAll) {

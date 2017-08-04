@@ -47,9 +47,9 @@ public class CaloriesPage : MonoBehaviour {
 
 		float value = BarInfo.FromNutrition (nutritionName, nutrition);
 		if (isAll) {
-			valueText.text = value + unit;
+			valueText.text = value * nutrition.nf_serving_size_qty + unit;
 		} else {
-			valueText.text = value / nutrition.nf_serving_size_qty + unit;
+			valueText.text = value + unit;
 		}
 
 	}

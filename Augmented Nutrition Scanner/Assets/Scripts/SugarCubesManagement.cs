@@ -6,8 +6,7 @@ public class SugarCubesManagement : MonoBehaviour {
     static public GameObject sampleSugar;
 	// Use this for initialization
 	void Start () {
-        sampleSugar = GameObject.Find("SugarDisplay");
-        sampleSugar.SetActive(false);
+		sampleSugar = Resources.Load<GameObject>("Prefabs/SugarDisplay");
     }
     static public SugarCubes NewSugarDisplay(string upc)
     {

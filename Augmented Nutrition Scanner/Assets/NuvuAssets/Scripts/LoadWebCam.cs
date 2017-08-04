@@ -20,7 +20,6 @@ public class LoadWebCam : MonoBehaviour
     }
 
     void ShareWebCamWithPopUp() {
-		Debug.Log ("Setting web texture");
         GameObject.Find("Managements").GetComponent<BarcodeScanner>().SetCamTexture(webCamTexture);
     }
     void Start()

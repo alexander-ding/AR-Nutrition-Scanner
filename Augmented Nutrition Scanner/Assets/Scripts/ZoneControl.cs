@@ -29,9 +29,9 @@ public class ZoneControl : MonoBehaviour {
 	public void SetValues() {
 		float value = BarInfo.FromNutrition (nutritionName, nutrition);
 		if (ServingAllButton.CheckState ()) {
-			StepTo (value);
+			StepTo (value * nutrition.nf_serving_size_qty);
 		} else {
-			StepTo (value / nutrition.nf_serving_size_qty);
+			StepTo (value);
 		}
 	}
 	void SetTo(float number) {
@@ -40,8 +40,8 @@ public class ZoneControl : MonoBehaviour {
 	}
 	void SetText() {
 		float value = BarInfo.FromNutrition (nutritionName, nutrition);
-		if (!ServingAllButton.CheckState ()) {
-			value /= nutrition.nf_serving_size_qty;
+		if (ServingAllButton.CheckState ()) {
+			value *= nutrition.nf_serving_size_qty;
 		}
 		percentageText.text = string.Format("{0:N1}", value / maxVal * 100f) + "%";
 	}
