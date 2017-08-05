@@ -1,5 +1,5 @@
 # AR Nutrition Scanner
-![Logo](http://imgur.com/UCd4Cb4)
+![Logo](http://i.imgur.com/UCd4Cb4.png)
 In this project, we are visualizing nutritional values of foods with AR by scanning barcodes. Barcode recognition is done using the `ZXing` library, and UPC (barcode) searches are done with `Nutritionix`, with a free API account (hence the 50 UPC searches per day limit). 
 
 The app is built in Unity, for IOS. 
