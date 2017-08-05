@@ -6587,7 +6587,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nutritionName: calories
-  circleImage: {fileID: 0}
+  percentageText: {fileID: 896648145}
+  circleImage: {fileID: 366865509}
 --- !u!1 &787577731
 GameObject:
   m_ObjectHideFlags: 0
@@ -6967,7 +6968,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nutritionName: protein
-  circleImage: {fileID: 0}
+  percentageText: {fileID: 1520874064}
+  circleImage: {fileID: 1572101513}
 --- !u!1 &885280398
 GameObject:
   m_ObjectHideFlags: 0
@@ -8901,7 +8903,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nutritionName: sodium
-  circleImage: {fileID: 0}
+  percentageText: {fileID: 1961420819}
+  circleImage: {fileID: 1977446115}
 --- !u!1 &1202979573
 GameObject:
   m_ObjectHideFlags: 0
@@ -10547,7 +10550,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nutritionName: sugar
-  circleImage: {fileID: 0}
+  percentageText: {fileID: 1064538456}
+  circleImage: {fileID: 1931884621}
 --- !u!1 &1359628323
 GameObject:
   m_ObjectHideFlags: 0
@@ -15928,7 +15932,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nutritionName: fat
-  circleImage: {fileID: 0}
+  percentageText: {fileID: 1124710996}
+  circleImage: {fileID: 1948401463}
 --- !u!1 &2058787982
 GameObject:
   m_ObjectHideFlags: 0

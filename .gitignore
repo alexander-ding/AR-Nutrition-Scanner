@@ -41,4 +41,7 @@
 ehthumbs.db
 Thumbs.db
 
+# Videos
+*.mov
+
 Augmented Nutrition Scanner/.vs/Augmented Nutrition Scanner/v15/.suo

@@ -1,23 +1,19 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/SwappableManagement.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Unique.cs">
     <Files>
-      <File FileName="Assets/Scripts/MoreInfoManagement.cs" Line="15" Column="3" />
-      <File FileName="Assets/Scripts/Panels/Panel4Switch.cs" Line="25" Column="37" />
-      <File FileName="Assets/NuvuAssets/Scripts/LoadWebCam.cs" Line="23" Column="37" />
-      <File FileName="Assets/Scripts/BarcodeScanner.cs" Line="49" Column="26" />
-      <File FileName="Assets/Scripts/PopUp.cs" Line="60" Column="80" />
-      <File FileName="Assets/Scripts/ZoneControl.cs" Line="28" Column="8" />
-      <File FileName="Assets/Scripts/UnchangedManagement.cs" Line="16" Column="3" />
-      <File FileName="Assets/Scripts/SwappableManagement.cs" Line="34" Column="4" />
-      <File FileName="Assets/Scripts/MiddleManagement.cs" Line="34" Column="17" />
-      <File FileName="Assets/Scripts/OverviewPage.cs" Line="18" Column="22" />
-      <File FileName="Assets/Scripts/ServingAllButton.cs" Line="42" Column="17" />
+      <File FileName="Assets/Scripts/Swiper.cs" Line="39" Column="23" />
+      <File FileName="Assets/Scripts/SwipeControl.cs" Line="74" Column="1" />
+      <File FileName="Assets/Scripts/SwappableManagement.cs" Line="77" Column="14" />
+      <File FileName="Assets/Scripts/ZoneControl.cs" Line="36" Column="29" />
+      <File FileName="Assets/Scripts/Unique.cs" Line="20" Column="21" />
+      <File FileName="Assets/Scripts/StartManagement.cs" Line="13" Column="3" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
       <Breakpoint enabled="false" file="/Users/apple/Google Drive/GitHub/augmented_nutrition_scanner/Augmented Nutrition Scanner/Assets/Scripts/BarcodeScanner.cs" line="66" column="1" />
+      <Breakpoint file="/Users/apple/Google Drive/GitHub/augmented_nutrition_scanner/Augmented Nutrition Scanner/Assets/Scripts/SwappableManagement.cs" line="74" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

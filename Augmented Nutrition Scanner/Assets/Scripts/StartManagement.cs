@@ -10,7 +10,7 @@ public class StartManagement : MonoBehaviour {
 	static public MoreInfoManagement sampleMoreInfo;
 	// Use this for initialization
 	void Start () {
-		//PlayerPrefs.SetInt ("tutorialDone", 0);
+		PlayerPrefs.SetInt ("tutorialDone", 0);
 		Tutorial = Resources.Load<GameObject>("Prefabs/Tutorial");
 		Reticle = GameObject.Find ("Reticle");
 		Overlay = GameObject.Find ("CameraOverlay");

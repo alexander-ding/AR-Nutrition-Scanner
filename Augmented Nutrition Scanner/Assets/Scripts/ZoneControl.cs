@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class ZoneControl : MonoBehaviour {
 	public string nutritionName;
 	private NutritionJSON nutrition = null;
-	private Text percentageText;
+	public Text percentageText;
 	public Image circleImage;
 
 	private const int frameCount = 60;
@@ -17,8 +17,7 @@ public class ZoneControl : MonoBehaviour {
 	
 	void Start () {
 		percentageText = transform.Find ("%").GetComponent<Text> ();
-		circleImage = transform.Find ("Circle").GetComponent<Image> ();
-        Debug.Log(circleImage);
+		// circleImage = transform.Find ("Circle").GetComponent<Image> ();
 	}
 	public void Initialize(NutritionJSON input) {
 		nutrition = input;
@@ -34,7 +33,7 @@ public class ZoneControl : MonoBehaviour {
 			StepTo (value);
 		}
 	}
-	void SetTo(float number) {
+	void SetTo(float number) {	
 		circleImage.fillAmount = number;
 		percentageText.text = string.Format("{0:N1}", (number * 100)) + "%";
 	}
