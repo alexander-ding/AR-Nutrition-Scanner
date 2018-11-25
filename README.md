@@ -5,6 +5,12 @@ In this project, we are visualizing nutritional values of foods with AR by scann
 The app is built in Unity, for IOS. 
 
 ## Project Page
+Checkout the [demo](https://s3.amazonaws.com/nuvuplatform-prod/uploads/video/video/6022/Demo.mp4)
+
+[![thumbnail](https://s3.amazonaws.com/nuvuplatform-prod/uploads/video/video/6022/thumbs/frame_0009.png)](https://s3.amazonaws.com/nuvuplatform-prod/uploads/video/video/6022/Demo.mp4)
+
+OR
+
 Visit the [portfolio page](https://cambridge.nuvustudio.com/studios/augmented-health/augmented-nutrition-scanner#tab-portfolio) of the project. 
 
 ## Usage
